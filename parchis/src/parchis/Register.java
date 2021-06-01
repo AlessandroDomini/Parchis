@@ -85,6 +85,10 @@ public class Register extends JFrame {
 					 preparedStatement.setString(1, txt_user.getText());
 				     preparedStatement.setString(2, txt_pass.getText());
 				     preparedStatement.executeUpdate();
+				    Login l1=new Login();
+					dispose();
+					l1.setDefaultCloseOperation(HIDE_ON_CLOSE);
+					l1.setVisible(true);
 					
 					
 				} catch (SQLException e1) {
