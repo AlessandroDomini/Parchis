@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class Server{
 
     /*We keep the port in a constant*/
-    private final static int PORT = 5000;
+    private final static int PORT = 5006;
 
     public static void main(String[] args) {
         
@@ -31,6 +31,7 @@ public class Server{
             //input del cliente 1
             BufferedReader input1 = new BufferedReader(new InputStreamReader(client1.getInputStream()));
             String nombre1 = input1.readLine();
+            System.out.println(nombre1);
             //output del cliente 1
             PrintStream output1 = new PrintStream(client1.getOutputStream());
             
@@ -51,14 +52,10 @@ public class Server{
             output1.println(nombre2);
             output2.println(nombre1);
            
-            
-            
-    
-            
             //close connection
-            client1.close();
-            client2
-            server.close();
+            //client1.close();
+            //client2
+            //server.close();
                
         } catch (IOException ex) {
             System.err.println(ex.getMessage());
