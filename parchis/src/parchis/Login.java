@@ -13,6 +13,11 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.net.Socket;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 
@@ -24,6 +29,9 @@ public class Login extends JFrame {
 	private JTextField text_Password;
 	private JTextField txt_port;
 	private JTextField txt_ipv4;
+	BufferedReader input;
+	PrintStream output;
+	Socket socket;
 
 	/**
 	 * Launch the application.
@@ -87,6 +95,28 @@ public class Login extends JFrame {
 		contentPane.add(text_Password);
 		text_Password.setColumns(10);
 		
+		JLabel lab_port = new JLabel("Port");
+		lab_port.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lab_port.setHorizontalAlignment(SwingConstants.CENTER);
+		lab_port.setBounds(76, 144, 46, 14);
+		contentPane.add(lab_port);
+		
+		JLabel lab_ip = new JLabel("IPV4");
+		lab_ip.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lab_ip.setHorizontalAlignment(SwingConstants.CENTER);
+		lab_ip.setBounds(76, 169, 46, 14);
+		contentPane.add(lab_ip);
+		
+		txt_port = new JTextField();
+		txt_port.setBounds(141, 142, 157, 20);
+		contentPane.add(txt_port);
+		txt_port.setColumns(10);
+		
+		txt_ipv4 = new JTextField();
+		txt_ipv4.setBounds(141, 167, 157, 20);
+		contentPane.add(txt_ipv4);
+		txt_ipv4.setColumns(10);
+		
 		JButton btn_Accept = new JButton("Accept");		
 		btn_Accept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -97,16 +127,22 @@ public class Login extends JFrame {
 				con.connectDataBase();
 				
 				String SQL="select * from players where User='"+user+"' and Password='"+pass+"'";
+				
 				try {
 					con.rs=con.statement.executeQuery(SQL);
 					if (con.rs.next()){
+						int portn = Integer.parseInt(txt_port.getText());
+						socket = new Socket(txt_ipv4.getText(), portn );
+						input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+						output = new PrintStream(socket.getOutputStream());
+						output.println(text_User.getText());
 						Game g1=new Game();
 						dispose();
 						g1.setDefaultCloseOperation(HIDE_ON_CLOSE);
 						g1.setVisible(true);
 						
 					}
-				} catch (SQLException e1) {
+				} catch (SQLException | IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -130,26 +166,6 @@ public class Login extends JFrame {
 		btnNewButton.setBounds(322, 95, 89, 23);
 		contentPane.add(btnNewButton);
 		
-		JLabel lab_port = new JLabel("Port");
-		lab_port.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lab_port.setHorizontalAlignment(SwingConstants.CENTER);
-		lab_port.setBounds(76, 144, 46, 14);
-		contentPane.add(lab_port);
-		
-		JLabel lab_ip = new JLabel("IPV4");
-		lab_ip.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lab_ip.setHorizontalAlignment(SwingConstants.CENTER);
-		lab_ip.setBounds(76, 169, 46, 14);
-		contentPane.add(lab_ip);
-		
-		txt_port = new JTextField();
-		txt_port.setBounds(141, 142, 157, 20);
-		contentPane.add(txt_port);
-		txt_port.setColumns(10);
-		
-		txt_ipv4 = new JTextField();
-		txt_ipv4.setBounds(141, 167, 157, 20);
-		contentPane.add(txt_ipv4);
-		txt_ipv4.setColumns(10);
+	
 	}
 }
