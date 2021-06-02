@@ -22,6 +22,8 @@ public class Login extends JFrame {
 	private JPanel contentPane;
 	private  JTextField text_User;
 	private JTextField text_Password;
+	private JTextField txt_port;
+	private JTextField txt_ipv4;
 
 	/**
 	 * Launch the application.
@@ -62,26 +64,26 @@ public class Login extends JFrame {
 		JLabel label_User = new JLabel("User");
 		label_User.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_User.setHorizontalAlignment(SwingConstants.CENTER);
-		label_User.setBounds(85, 97, 46, 14);
+		label_User.setBounds(85, 84, 46, 14);
 		contentPane.add(label_User);
 		
 		JLabel label_Password = new JLabel("Password");
 		label_Password.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		label_Password.setHorizontalAlignment(SwingConstants.CENTER);
-		label_Password.setBounds(72, 134, 65, 14);
+		label_Password.setBounds(66, 109, 65, 14);
 		contentPane.add(label_Password);
 		
 		JButton btn_Cancel = new JButton("Cancel");
-		btn_Cancel.setBounds(241, 197, 89, 23);
+		btn_Cancel.setBounds(241, 210, 89, 23);
 		contentPane.add(btn_Cancel);
 		
 		text_User = new JTextField();
-		text_User.setBounds(147, 95, 151, 20);
+		text_User.setBounds(141, 82, 157, 20);
 		contentPane.add(text_User);
 		text_User.setColumns(10);
 		
 		text_Password = new JTextField();
-		text_Password.setBounds(147, 132, 151, 20);
+		text_Password.setBounds(141, 107, 157, 20);
 		contentPane.add(text_Password);
 		text_Password.setColumns(10);
 		
@@ -111,7 +113,7 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btn_Accept.setBounds(111, 197, 89, 23);
+		btn_Accept.setBounds(113, 210, 89, 23);
 		contentPane.add(btn_Accept);
 		
 		JButton btnNewButton = new JButton("Register");
@@ -125,7 +127,29 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(321, 109, 89, 23);
+		btnNewButton.setBounds(322, 95, 89, 23);
 		contentPane.add(btnNewButton);
+		
+		JLabel lab_port = new JLabel("Port");
+		lab_port.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lab_port.setHorizontalAlignment(SwingConstants.CENTER);
+		lab_port.setBounds(76, 144, 46, 14);
+		contentPane.add(lab_port);
+		
+		JLabel lab_ip = new JLabel("IPV4");
+		lab_ip.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lab_ip.setHorizontalAlignment(SwingConstants.CENTER);
+		lab_ip.setBounds(76, 169, 46, 14);
+		contentPane.add(lab_ip);
+		
+		txt_port = new JTextField();
+		txt_port.setBounds(141, 142, 157, 20);
+		contentPane.add(txt_port);
+		txt_port.setColumns(10);
+		
+		txt_ipv4 = new JTextField();
+		txt_ipv4.setBounds(141, 167, 157, 20);
+		contentPane.add(txt_ipv4);
+		txt_ipv4.setColumns(10);
 	}
 }
