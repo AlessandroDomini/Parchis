@@ -22,23 +22,42 @@ public class Server{
             ServerSocket server = new ServerSocket(PORT);
             System.out.println("Server started");    
               
-            //Client Socket
-            Socket client;
-            System.out.println("Server waiting for a client...");  
-            client = server.accept();
+           //Client1 Socket
+            Socket client1;
+            System.out.println("Cliente 1");  
+            client1 = server.accept();
             //setSoLinger closes the socket giving 10mS to receive the remaining data
-            client.setSoLinger (true, 10);
-            //an input reader to read from the socket
-            BufferedReader input = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            //to print data out
-            PrintStream output = new PrintStream(client.getOutputStream());
+            client1.setSoLinger (true, 10);
+            //input del cliente 1
+            BufferedReader input1 = new BufferedReader(new InputStreamReader(client1.getInputStream()));
+            String nombre1 = input1.readLine();
+            //output del cliente 1
+            PrintStream output1 = new PrintStream(client1.getOutputStream());
+            
+            
+            //Client2 Socket
+            Socket client2;
+            System.out.println("Cliente 2");  
+            client2 = server.accept();
+            //setSoLinger closes the socket giving 10mS to receive the remaining data
+            client2.setSoLinger (true, 10);
+            //input del cliente 2
+            BufferedReader input2 = new BufferedReader(new InputStreamReader(client2.getInputStream()));
+            String nombre2 = input2.readLine();
+            //output del cliente 2
+            PrintStream output2 = new PrintStream(client2.getOutputStream());
+            
+            //Pasar nombres al otro jugador
+            output1.println(nombre2);
+            output2.println(nombre1);
            
             
             
     
             
             //close connection
-            client.close();
+            client1.close();
+            client2
             server.close();
                
         } catch (IOException ex) {
