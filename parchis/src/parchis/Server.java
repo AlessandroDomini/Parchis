@@ -9,6 +9,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 
+
 public class Server{
 
     /*We keep the port in a constant*/
@@ -22,7 +23,7 @@ public class Server{
             ServerSocket server = new ServerSocket(PORT);
             System.out.println("Server started");    
               
-           //Client1 Socket
+            //Client1 Socket
             Socket client1;
             System.out.println("Cliente 1");  
             client1 = server.accept();
@@ -31,9 +32,10 @@ public class Server{
             //input del cliente 1
             BufferedReader input1 = new BufferedReader(new InputStreamReader(client1.getInputStream()));
             String nombre1 = input1.readLine();
-            System.out.println(nombre1);
             //output del cliente 1
             PrintStream output1 = new PrintStream(client1.getOutputStream());
+            
+            System.out.println(nombre1);
             
             
             //Client2 Socket
@@ -48,14 +50,19 @@ public class Server{
             //output del cliente 2
             PrintStream output2 = new PrintStream(client2.getOutputStream());
             
+            System.out.println(nombre2);
+            
             //Pasar nombres al otro jugador
             output1.println(nombre2);
             output2.println(nombre1);
-           
+            
+            
+    
+            
             //close connection
-            //client1.close();
-            //client2
-            //server.close();
+            client1.close();
+            client2.close();
+            server.close();
                
         } catch (IOException ex) {
             System.err.println(ex.getMessage());

@@ -136,10 +136,12 @@ public class Login extends JFrame {
 						input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 						output = new PrintStream(socket.getOutputStream());
 						output.println(text_User.getText());
+						String n1 =input.readLine();
 						Game g1=new Game();
 						dispose();
 						g1.setDefaultCloseOperation(HIDE_ON_CLOSE);
 						g1.setVisible(true);
+						g1.usr_1.setText("Player "+n1+" is online");
 						
 					}
 				} catch (SQLException | IOException e1) {
