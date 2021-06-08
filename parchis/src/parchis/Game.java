@@ -21,6 +21,9 @@ public class Game extends JFrame {
 
 	private JPanel contentPane;
 	JLabel usr_1;
+	protected Casilla casilla[]=new Casilla[68];
+	protected Ficha amarillas[]=new Ficha[4];
+	
 
 	/**
 	 * Launch the application.
@@ -59,6 +62,21 @@ public class Game extends JFrame {
 				}
 			}
 		});
+		
+		/*casilla[0] = new Casilla(359.0, 578.0);
+		casilla[1] = new Casilla(360.0 , 554.0);
+		casilla[2] = new Casilla(359.0, 520.0);
+		casilla[3] = new Casilla(360.0, 499.0);
+		casilla[4] = new Casilla(358.0, 467.0);
+		casilla[5] = new Casilla(359.0, 437.0);
+		casilla[6] = new Casilla(361.0, 415.0);
+		casilla[7] = new Casilla(360.0, 382.0);*/
+		
+		amarillas[0] = new Ficha(482.0, 454.0);
+		amarillas[1] = new Ficha(543.0 , 456.0);
+		amarillas[2] = new Ficha(472.0 , 541.0);
+		amarillas[3] = new Ficha(548.0 , 546.0);
+		
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
