@@ -1,0 +1,77 @@
+Posicion x = 359.0 Posicion y = 578.0
+Posicion x = 360.0 Posicion y = 554.0
+Posicion x = 359.0 Posicion y = 520.0
+Posicion x = 360.0 Posicion y = 499.0
+Posicion x = 358.0 Posicion y = 467.0
+Posicion x = 359.0 Posicion y = 437.0
+Posicion x = 361.0 Posicion y = 415.0
+Posicion x = 360.0 Posicion y = 382.0
+Posicion x = 406.0 Posicion y = 371.0
+Posicion x = 431.0 Posicion y = 383.0
+Posicion x = 454.0 Posicion y = 384.0
+Posicion x = 486.0 Posicion y = 372.0
+Posicion x = 514.0 Posicion y = 383.0
+Posicion x = 541.0 Posicion y = 390.0
+Posicion x = 572.0 Posicion y = 388.0
+Posicion x = 600.0 Posicion y = 384.0
+Posicion x = 597.0 Posicion y = 307.0
+Posicion x = 599.0 Posicion y = 260.0
+Posicion x = 570.0 Posicion y = 257.0
+Posicion x = 544.0 Posicion y = 256.0
+Posicion x = 512.0 Posicion y = 256.0
+Posicion x = 488.0 Posicion y = 258.0
+Posicion x = 456.0 Posicion y = 259.0
+Posicion x = 432.0 Posicion y = 259.0
+Posicion x = 403.0 Posicion y = 259.0
+Posicion x = 360.0 Posicion y = 220.0
+Posicion x = 362.0 Posicion y = 193.0
+Posicion x = 363.0 Posicion y = 169.0
+Posicion x = 361.0 Posicion y = 139.0
+Posicion x = 363.0 Posicion y = 111.0
+Posicion x = 362.0 Posicion y = 84.0
+Posicion x = 363.0 Posicion y = 52.0
+Posicion x = 363.0 Posicion y = 30.0
+Posicion x = 320.0 Posicion y = 25.0
+Posicion x = 273.0 Posicion y = 24.0
+Posicion x = 270.0 Posicion y = 52.0
+Posicion x = 271.0 Posicion y = 82.0
+Posicion x = 272.0 Posicion y = 111.0
+Posicion x = 274.0 Posicion y = 134.0
+Posicion x = 271.0 Posicion y = 169.0
+Posicion x = 273.0 Posicion y = 194.0
+Posicion x = 271.0 Posicion y = 227.0
+Posicion x = 238.0 Posicion y = 256.0
+Posicion x = 211.0 Posicion y = 255.0
+Posicion x = 182.0 Posicion y = 252.0
+Posicion x = 154.0 Posicion y = 244.0
+Posicion x = 126.0 Posicion y = 255.0
+Posicion x = 96.0 Posicion y = 255.0
+Posicion x = 72.0 Posicion y = 259.0
+Posicion x = 42.0 Posicion y = 258.0
+Posicion x = 38.0 Posicion y = 306.0
+Posicion x = 40.0 Posicion y = 354.0
+Posicion x = 65.0 Posicion y = 354.0
+Posicion x = 97.0 Posicion y = 355.0
+Posicion x = 122.0 Posicion y = 353.0
+Posicion x = 153.0 Posicion y = 372.0
+Posicion x = 179.0 Posicion y = 356.0
+Posicion x = 206.0 Posicion y = 355.0
+Posicion x = 238.0 Posicion y = 354.0
+Posicion x = 271.0 Posicion y = 384.0
+Posicion x = 274.0 Posicion y = 413.0
+Posicion x = 274.0 Posicion y = 439.0
+Posicion x = 259.0 Posicion y = 465.0
+Posicion x = 271.0 Posicion y = 499.0
+Posicion x = 274.0 Posicion y = 524.0
+Posicion x = 272.0 Posicion y = 558.0
+Posicion x = 276.0 Posicion y = 582.0
+Posicion x = 315.0 Posicion y = 580.0
+
+Casa amarilla 1 x = 482.0 Posicion y = 454.0
+Casa amarilla 2 x = 543.0 Posicion y = 456.0
+Casa amarilla 3 x = 472.0 Posicion y = 541.0
+Casa amarilla 4 x = 548.0 Posicion y = 546.0
+
+
+ancho 66
+alto -142
