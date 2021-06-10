@@ -29,7 +29,6 @@ public class Game extends JFrame {
 	JLabel usr_1;
 	protected Casilla casilla[]=new Casilla[68];
 	protected Ficha amarillas[]=new Ficha[4];
-	protected String s="/Ficha_amarilla.png";
 	
 	
 
@@ -79,9 +78,7 @@ public class Game extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel f1 = new JLabel("");
-		f1.setBounds(461, 438, 46, 46);
-		panel.add(f1);
+		
 	
 		
 		/*casilla[0] = new Casilla(359.0, 578.0);
@@ -93,7 +90,7 @@ public class Game extends JFrame {
 		casilla[6] = new Casilla(361.0, 415.0);
 		casilla[7] = new Casilla(360.0, 382.0);*/
 		
-		amarillas[0] = new Ficha(482.0, 454.0,f1, s);
+		amarillas[0] = new Ficha(482.0, 454.0, panel);
 		/*amarillas[1] = new Ficha(543.0 , 456.0);
 		amarillas[2] = new Ficha(472.0 , 541.0);
 		amarillas[3] = new Ficha(548.0 , 546.0);
@@ -146,9 +143,6 @@ public class Game extends JFrame {
 		area_chat.setBounds(652, 371, 221, 243);
 		contentPane.add(area_chat);
 		
-
-		
-		
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Game.class.getResource("/parchis.png")));
@@ -159,13 +153,12 @@ public class Game extends JFrame {
 		btn_move.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				f1.setBounds(359, 578, 46, 46);
+				amarillas[0].moverFicha();
+				
 			}
 		});
 		btn_move.setBounds(326, 625, 89, 23);
 		contentPane.add(btn_move);
-		
-	
-	
+
 	}
 }
