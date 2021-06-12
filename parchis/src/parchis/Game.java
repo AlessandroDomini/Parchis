@@ -78,39 +78,6 @@ public class Game extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		
-	
-		
-		/*casilla[0] = new Casilla(359.0, 578.0);
-		casilla[1] = new Casilla(360.0 , 554.0);
-		casilla[2] = new Casilla(359.0, 520.0);
-		casilla[3] = new Casilla(360.0, 499.0);
-		casilla[4] = new Casilla(358.0, 467.0);
-		casilla[5] = new Casilla(359.0, 437.0);
-		casilla[6] = new Casilla(361.0, 415.0);
-		casilla[7] = new Casilla(360.0, 382.0);*/
-		
-		amarillas[0] = new Ficha(482.0, 454.0, panel);
-		/*amarillas[1] = new Ficha(543.0 , 456.0);
-		amarillas[2] = new Ficha(472.0 , 541.0);
-		amarillas[3] = new Ficha(548.0 , 546.0);
-		*/
-
-	
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-		usr_1 = new JLabel("");
-		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
-		usr_1.setVerticalAlignment(SwingConstants.TOP);
-		usr_1.setBounds(652, 30, 200, 14);
-		contentPane.add(usr_1);
-		
-		JLabel usr_2 = new JLabel("");
-		usr_2.setBounds(694, 43, 116, 14);
-		contentPane.add(usr_2);
-		
 		JLabel resultdado = new JLabel("");
 		resultdado.setHorizontalAlignment(SwingConstants.CENTER);
 		resultdado.setBounds(157, 625, 46, 23);
@@ -126,8 +93,41 @@ public class Game extends JFrame {
 				
 			}
 		});
+		
+		
 		btnNewButton.setBounds(36, 625, 111, 23);
 		contentPane.add(btnNewButton);
+
+		casilla[0] = new Casilla(350, 563);
+		casilla[1] = new Casilla(350, 533);
+		casilla[2] = new Casilla(350, 503);
+		casilla[3] = new Casilla(350, 475);
+		casilla[4] = new Casilla(350, 447);
+		casilla[5] = new Casilla(350, 419);
+		casilla[6] = new Casilla(350, 392);
+		casilla[7] = new Casilla(350, 364);
+		
+		amarillas[0] = new Ficha(482, 454, panel);
+		/*amarillas[1] = new Ficha(543.0 , 456.0);
+		amarillas[2] = new Ficha(472.0 , 541.0);
+		amarillas[3] = new Ficha(548.0 , 546.0);
+		*/
+
+		amarillas[0].moverFicha(casilla[2]);
+
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		usr_1 = new JLabel("");
+		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
+		usr_1.setVerticalAlignment(SwingConstants.TOP);
+		usr_1.setBounds(652, 30, 200, 14);
+		contentPane.add(usr_1);
+		
+		JLabel usr_2 = new JLabel("");
+		usr_2.setBounds(694, 43, 116, 14);
+		contentPane.add(usr_2);
 		
 		JLabel lbl_chat = new JLabel("CHAT");
 		lbl_chat.setHorizontalAlignment(SwingConstants.CENTER);
@@ -153,7 +153,6 @@ public class Game extends JFrame {
 		btn_move.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				amarillas[0].moverFicha();
 				
 			}
 		});
