@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 public class Ficha {
 	
 	private final int SIZE=46;
-	private double y;
-	private double x;
+	private int y;
+	private int x;
 	private String nombre;
 	protected String s="/Ficha_amarilla.png";
 	private JLabel f1 = new JLabel("");
@@ -27,8 +27,6 @@ public class Ficha {
 
 	}
 	
-	
-
 	public void moverFicha(Casilla c) {
 		
 		f1.addMouseListener(new MouseAdapter() {
@@ -36,17 +34,44 @@ public class Ficha {
 			public void mousePressed(MouseEvent e) {
 				
 				f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
-				
+			
 			}
 		});
 		
 		
 	}
 	
+	
+	
+	public int moverFicha() {
+		
+		return 0;
+		
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+
 
 	public JLabel getF1() {
 		return f1;
 	}
+	
+	
 
 
 
