@@ -217,7 +217,7 @@ public class Game extends JFrame {
 		usr_1 = new JLabel("");
 		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
 		usr_1.setVerticalAlignment(SwingConstants.TOP);
-		usr_1.setBounds(652, 30, 200, 14);
+		usr_1.setBounds(633, 30, 253, 27);
 		contentPane.add(usr_1);
 		
 		JLabel usr_2 = new JLabel("");
