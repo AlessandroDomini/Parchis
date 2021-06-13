@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class Server{
 
     /*We keep the port in a constant*/
-    private final static int PORT = 5006;
+    private final static int PORT = 5007;
 
     public static void main(String[] args) {
         
