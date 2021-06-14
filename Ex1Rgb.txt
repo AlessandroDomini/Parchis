@@ -1,0 +1,117 @@
+package firstDemo;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentListener;
+import javax.swing.JSlider;
+import javax.swing.JLabel;
+import java.awt.Panel;
+import java.awt.Color;
+import javax.swing.BoxLayout;
+
+public class Ex1Rgb extends JFrame {
+
+	private JPanel contentPane;
+
+		
+	
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Ex1Rgb frame = new Ex1Rgb();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Ex1Rgb() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 561, 497);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JSlider red = new JSlider();
+		red.setSnapToTicks(true);
+		red.setPaintTicks(true);
+		red.setPaintLabels(true);
+		red.setMinorTickSpacing(5);
+		red.setMaximum(255);
+		red.setMajorTickSpacing(25);
+		red.setBounds(80, 195, 325, 45);
+		contentPane.add(red);
+		
+		JSlider green = new JSlider();
+		green.setSnapToTicks(true);
+		green.setPaintTicks(true);
+		green.setPaintLabels(true);
+		green.setMinorTickSpacing(5);
+		green.setMaximum(255);
+		green.setMajorTickSpacing(25);
+		green.setBounds(77, 284, 325, 45);
+		contentPane.add(green);
+		
+		JSlider blue = new JSlider();
+		blue.setSnapToTicks(true);
+		blue.setPaintTicks(true);
+		blue.setPaintLabels(true);
+		blue.setMinorTickSpacing(5);
+		blue.setMaximum(255);
+		blue.setMajorTickSpacing(25);
+		blue.setBounds(79, 112, 325, 45);
+		contentPane.add(blue);
+		
+		JLabel lblNewLabel = new JLabel("Red");
+		lblNewLabel.setBounds(87, 85, 46, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("Green");
+		lblNewLabel_1.setBounds(89, 168, 46, 14);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("Blue");
+		lblNewLabel_2.setBounds(90, 259, 46, 14);
+		contentPane.add(lblNewLabel_2);
+		
+		Panel panel = new Panel();
+		panel.setBackground(Color.YELLOW);
+		panel.setBounds(44, 353, 384, 52);
+		contentPane.add(panel);
+		
+		 ChangeListener c = new ChangeListener(){
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				
+				panel.setBackground(new Color (red.getValue(), green.getValue(), blue.getValue()));
+
+				
+			}};
+		
+	red.addChangeListener(c);
+	green.addChangeListener(c);
+	blue.addChangeListener(c);
+
+	
+		
+	}
+
+}
