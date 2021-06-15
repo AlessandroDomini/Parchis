@@ -249,6 +249,8 @@ public class Game extends JFrame {
 				if(arg0.getSource().equals(amarillas[0].getF1())) {
 					amarillas[0].moverFicha(casillaA[anta1+n],contentPane);
 					anta1=anta1+n;
+					
+
 				}
 				else if(arg0.getSource().equals(amarillas[1].getF1())) {
 					amarillas[1].moverFicha(casillaA[anta2+n], contentPane);
@@ -281,6 +283,24 @@ public class Game extends JFrame {
 					antr4=antr4+n;
 				}
 				
+				if(amarillas[0].getF1().getX()==280 && amarillas[0].getF1().getY()==335
+				   && amarillas[1].getF1().getX()==280 && amarillas[1].getF1().getY()==335
+				   && amarillas[2].getF1().getX()==280 && amarillas[2].getF1().getY()==335
+				   && amarillas[3].getF1().getX()==280 && amarillas[3].getF1().getY()==335) {
+							
+							JOptionPane.showMessageDialog(contentPane, "YELLOW WINS!!!");
+
+					}
+				
+				 if(rojas[0].getF1().getX()==285 && rojas[0].getF1().getY()==235
+						   && rojas[1].getF1().getX()==285 && rojas[1].getF1().getY()==235
+						   && rojas[2].getF1().getX()==285 && rojas[2].getF1().getY()==235
+						   && rojas[3].getF1().getX()==285 && rojas[3].getF1().getY()==235) {
+									
+									JOptionPane.showMessageDialog(contentPane, "RED WINS!!!");
+
+				}
+
 			}
 			
 				@Override
@@ -317,18 +337,7 @@ public class Game extends JFrame {
 			rojas[1].getF1().addMouseListener(m1);
 			rojas[2].getF1().addMouseListener(m1);
 			rojas[3].getF1().addMouseListener(m1);
-		
-		if(amarillas[0].getX()==280 && amarillas[0].getY()==335
-		   && amarillas[1].getX()==280 && amarillas[1].getY()==335
-		   && amarillas[2].getX()==280 && amarillas[2].getY()==335
-		   && amarillas[3].getX()==280 && amarillas[3].getY()==335) {
 			
-			
-			JOptionPane.showMessageDialog(contentPane, "YELLOW WINS!!!");
-
-			
-		}
-		
 
 	}
 }
