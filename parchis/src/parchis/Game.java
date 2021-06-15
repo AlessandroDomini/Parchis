@@ -19,9 +19,11 @@ import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.Font;
 
 public class Game extends JFrame {
 
@@ -30,6 +32,7 @@ public class Game extends JFrame {
 	int ant1, ant2, ant3, ant4;
 	protected Casilla casilla[]=new Casilla[68];
 	protected Ficha amarillas[]=new Ficha[4];
+	int n=0;
 	
 	
 
@@ -96,7 +99,7 @@ public class Game extends JFrame {
 		/*casilla[0] = new Casilla(350, 563);
 		casilla[1] = new Casilla(350, 533);
 		casilla[2] = new Casilla(350, 503);
-		casilla[3] = new Casilla(350, 475);*/
+		casilla[3] = new Casilla(350, 475);
 		casilla[0] = new Casilla(350, 447);
 		casilla[1] = new Casilla(350, 419);
 		casilla[2] = new Casilla(350, 392);
@@ -161,13 +164,24 @@ public class Game extends JFrame {
 		casilla[61] = new Casilla(230, 503);
 		casilla[62] = new Casilla(230, 533);
 		casilla[63] = new Casilla(230, 563);
-		casilla[64] = new Casilla(300, 563);
+		casilla[64] = new Casilla(300, 563);*/
 		
 		
-		amarillas[0] = new Ficha(442, 434, panel);
-		amarillas[1] = new Ficha(540, 434, panel);
-		amarillas[2] = new Ficha(442 , 500, panel);
-		amarillas[3] = new Ficha(540 , 500, panel);
+		casilla[1] = new Casilla(350, 563);
+		casilla[2] = new Casilla(350, 533);
+		casilla[3] = new Casilla(350, 503);
+		casilla[4] = new Casilla(350, 475);
+		casilla[5] = new Casilla(350, 447);
+		casilla[6] = new Casilla(350, 419);
+		casilla[7] = new Casilla(350, 392);
+		casilla[8] = new Casilla(350, 364);
+		
+		
+		amarillas[0] = new Ficha(442, 434, panel,"am1");		
+		amarillas[1] = new Ficha(540, 434, panel,"am2");
+		amarillas[2] = new Ficha(442 , 500, panel,"am3");
+		amarillas[3] = new Ficha(540 , 500, panel,"am4");
+
 		
 
 		JLabel resultdado = new JLabel("");
@@ -176,32 +190,15 @@ public class Game extends JFrame {
 		contentPane.add(resultdado);
 		
 		
-		
-		
 		JButton btnNewButton = new JButton("Tirar dado");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dado d1= new Dado();
-				int n= d1.tirarDado();
+				n= d1.tirarDado();
 				String n1= String.valueOf(n);
 				resultdado.setText(n1);
 				
-				if(true) {
-					amarillas[0].moverFicha(casilla[ant1+n-1]);
-					ant1=ant1+n;
-				}
-				else if(true) {
-					amarillas[1].moverFicha(casilla[ant2+n-1]);
-					ant2=ant2+n;
-				}
-				else if(true) {
-					amarillas[2].moverFicha(casilla[ant3+n-1]);
-					ant3=ant3+n;
-				}
-				else if(true) {
-					amarillas[3].moverFicha(casilla[ant4+n-1]);
-					ant4=ant4+n;
-				}
+				
 				System.out.println(ant1+" "+ant2+" "+ ant3+" "+ant4);
 
 			}
@@ -215,8 +212,8 @@ public class Game extends JFrame {
 		contentPane.setLayout(null);
 		
 		usr_1 = new JLabel("");
-		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
 		usr_1.setVerticalAlignment(SwingConstants.TOP);
+		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
 		usr_1.setBounds(633, 30, 253, 27);
 		contentPane.add(usr_1);
 		
@@ -247,7 +244,62 @@ public class Game extends JFrame {
 		
 		
 		
-	
+		MouseListener m1 = new MouseListener(){
+
+				
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				if(arg0.getSource().equals(amarillas[0].getF1())) {
+					amarillas[0].moverFicha(casilla[ant1+n]);
+					ant1=ant1+n;
+				}
+				else if(arg0.getSource().equals(amarillas[1].getF1())) {
+					amarillas[1].moverFicha(casilla[ant2+n]);
+					ant2=ant2+n;
+				}
+				else if(arg0.getSource().equals(amarillas[2].getF1())) {
+					amarillas[2].moverFicha(casilla[ant3+n]);
+					ant3=ant3+n;
+				}
+				else if(arg0.getSource().equals(amarillas[3].getF1())) {
+					amarillas[3].moverFicha(casilla[ant4+n]);
+					ant4=ant4+n;
+				}
+				
+			}
+			
+				@Override
+				public void mouseClicked(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseEntered(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void mouseExited(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				
+
+				@Override
+				public void mouseReleased(MouseEvent arg0) {
+					// TODO Auto-generated method stub
+					
+				}};
+		
+		amarillas[0].getF1().addMouseListener(m1);
+		amarillas[1].getF1().addMouseListener(m1);
+		amarillas[2].getF1().addMouseListener(m1);
+		amarillas[3].getF1().addMouseListener(m1);
 		
 		
 
