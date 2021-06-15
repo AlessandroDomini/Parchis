@@ -1,11 +1,15 @@
 package parchis;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class Ficha {
 	
@@ -13,31 +17,29 @@ public class Ficha {
 	private int y;
 	private int x;
 	private String nombre;
-	protected String s="/Ficha_amarilla.png";
 	private JLabel f1 = new JLabel("");
 	
 	public Ficha() {}
 	
-	public Ficha(int x, int y, JPanel p1) {
+	public Ficha(int x, int y, JPanel p1, String nombre, String s) {
 		this.x = x;
 		this.y = y;
+		this.nombre = nombre;
 		f1.setBounds(x, y, SIZE, SIZE );
 		f1.setIcon(new ImageIcon(Game.class.getResource(s)));
 		p1.add(f1);
 
 	}
 	
-	public void moverFicha(Casilla c) {
+	public void moverFicha(Casilla c, JPanel contentPane) {
 		
-		f1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				
-				f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
+		try {		
+		
+		f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
+		
+		}catch(NullPointerException e) {
 			
-			}
-		});
-		
+		  JOptionPane.showMessageDialog(contentPane, "You must roll the dice first!  ", " Warning ", JOptionPane.WARNING_MESSAGE);		}
 		
 	}
 	
@@ -65,18 +67,14 @@ public class Ficha {
 		this.x = x;
 	}
 
-
-
 	public JLabel getF1() {
 		return f1;
 	}
 	
-	
-
-
-
 	public void setF1(JLabel f1) {
 		this.f1 = f1;
 	}
+	
+	
 
 }

@@ -25,16 +25,18 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private  JTextField text_User;
+	JTextField text_User;
 	private JTextField text_Password;
 	private JTextField txt_port;
 	private JTextField txt_ipv4;
 	private JComboBox combo_color;
+	ImageIcon loading = new ImageIcon("/loading.gif");
 	BufferedReader input;
 	PrintStream output;
 	Socket socket;
@@ -61,6 +63,10 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		
+
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -144,7 +150,7 @@ public class Login extends JFrame {
 		btn_Accept.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				JOptionPane.showMessageDialog(contentPane, "Waiting to the other player...");
+				JOptionPane.showMessageDialog(contentPane, "Loading...");
 
 				Conexion con = new Conexion();
 				String user=text_User.getText();
@@ -160,7 +166,7 @@ public class Login extends JFrame {
 						socket = new Socket(txt_ipv4.getText(), portn );
 						input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 						output = new PrintStream(socket.getOutputStream());
-						output.println(text_User.getText()+" with color "+(String) combo_color.getSelectedItem());
+						output.println(user+" with color "+(String) combo_color.getSelectedItem());
 						String n1 =input.readLine();
 						Game g1=new Game();
 						dispose();
