@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Server{
 
     /*We keep the port in a constant*/
-    private final static int PORT = 5010;
+    private final static int PORT = 5001;
     
    
 
@@ -39,7 +39,6 @@ public class Server{
             //output del cliente 1
             DataOutputStream output1 = new DataOutputStream(client1.getOutputStream());
             PrintStream outputC = new PrintStream(client1.getOutputStream());
-            String amarillo = "amarillo";
             System.out.println(nombre1);
             
             
@@ -55,14 +54,10 @@ public class Server{
             //output del cliente 2
             DataOutputStream output2 = new DataOutputStream(client2.getOutputStream());
             PrintStream outputC2 = new PrintStream(client2.getOutputStream());
-            String rojo = "rojo";
             //Mandar nombres y colores
-            //output1.writeUTF(nombre2);
-            //output1.wait(1);
-            outputC.println("amarillo");
-            //output2.writeUTF(nombre1);
-            //output2.wait(1);
-            outputC2.println("rojo");
+            
+            outputC.println("Your nick is "+nombre2+" With Color red "+ " and Player "+nombre1+" with color Yellow is online");
+            outputC2.println("Your nick is "+nombre1+" With Color yellow "+" and Player "+nombre2+" with color Red is online");
 
 
             // Threads
@@ -83,3 +78,4 @@ public class Server{
     }
   
 }
+
