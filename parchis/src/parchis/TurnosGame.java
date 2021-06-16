@@ -22,9 +22,11 @@ public void run() {
 		try {
 			int ficha = input.readInt();
 			int casilla = input.readInt();
-			if(this.G1.who.equals("amarillo")){
+			if(this.G1.who.contains("Yellow")){
 				this.G1.amarillas[ficha].moverFicha(this.G1.casillaA[casilla]);
-			}else if(this.G1.who.equals("rojo")) {
+				
+				
+			}else if(this.G1.who.contains("Red")) {
 				this.G1.rojas[ficha].moverFicha(this.G1.casillaR[casilla]);
 			}
 			
