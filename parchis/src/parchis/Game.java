@@ -36,7 +36,6 @@ import java.awt.Font;
 public class Game extends JFrame {
 
 	private JPanel contentPane;
-	JLabel usr_1;
 	int anta1, anta2, anta3, anta4, antr1, antr2, antr3, antr4;
 	protected String imagenA="/Ficha_amarilla.png";
 	protected String imagenR="/Ficha_roja.png";
@@ -44,32 +43,13 @@ public class Game extends JFrame {
 	protected Casilla casillaR[]=new Casilla[76];
 	protected Ficha amarillas[]=new Ficha[4];
 	protected Ficha rojas[]=new Ficha[4];
+	JTextArea area_usr;
 	int n=0;
 	DataInputStream input = null;
 	DataOutputStream output = null;
 	String who;
 	TurnosGame leer;
-	
 
-	/**
-	 * Launch the application.
-	 */
-	/*public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			
-			public void run() {
-				try {
-					
-					Game frame = new Game();
-					frame.setVisible(true);
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the frame.
@@ -227,11 +207,11 @@ public class Game extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		usr_1 = new JLabel("");
-		usr_1.setVerticalAlignment(SwingConstants.TOP);
-		usr_1.setHorizontalAlignment(SwingConstants.CENTER);
-		usr_1.setBounds(633, 30, 253, 27);
-		contentPane.add(usr_1);
+		area_usr = new JTextArea();
+		area_usr.setEditable(false);
+		area_usr.setLineWrap(true);
+		area_usr.setBounds(633, 24, 253, 84);
+		contentPane.add(area_usr);
 		
 		JTextArea area_instruct = new JTextArea();
 		area_instruct.setEditable(false);
@@ -367,5 +347,4 @@ public class Game extends JFrame {
 	}
 	
 	public void SetWho(String who) {this.who = who;}
-	
 }
