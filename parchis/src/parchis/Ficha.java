@@ -31,23 +31,17 @@ public class Ficha {
 
 	}
 	
-	public void moverFicha(Casilla c, JPanel contentPane) {
+	public void moverFicha(Casilla c) {
 		
 		try {		
 		
-		f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
+			f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
 		
 		}catch(NullPointerException e) {
 			
-		  JOptionPane.showMessageDialog(contentPane, "You must roll the dice first!  ", " Warning ", JOptionPane.WARNING_MESSAGE);		}
-		
-	}
-	
-	
-	
-	public int moverFicha() {
-		
-		return 0;
+			JOptionPane.showMessageDialog(null, "You have to roll the dice first motherf*******");
+			
+		}
 		
 	}
 
