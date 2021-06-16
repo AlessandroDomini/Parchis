@@ -35,11 +35,11 @@ public class Login extends JFrame {
 	private JTextField text_Password;
 	private JTextField txt_port;
 	private JTextField txt_ipv4;
-	private JComboBox combo_color;
 	ImageIcon loading = new ImageIcon("/loading.gif");
 	BufferedReader input;
 	PrintStream output;
 	Socket socket;
+	Game g1;
 
 	/**
 	 * Launch the application.
@@ -93,12 +93,6 @@ public class Login extends JFrame {
 		label_Password.setBounds(62, 81, 65, 14);
 		contentPane.add(label_Password);
 		
-		combo_color = new JComboBox();
-		combo_color.setModel(new DefaultComboBoxModel(new String[] {"Red", "Blue", "Yellow", "Green"}));
-		combo_color.setToolTipText("");
-		combo_color.setBounds(163, 174, 102, 22);
-		contentPane.add(combo_color);
-		
 		text_User = new JTextField();
 		text_User.setBounds(141, 54, 157, 20);
 		contentPane.add(text_User);
@@ -143,7 +137,7 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btn_Cancel.setBounds(283, 227, 89, 23);
+		btn_Cancel.setBounds(273, 203, 89, 23);
 		contentPane.add(btn_Cancel);
 		
 		JButton btn_Accept = new JButton("Accept");		
@@ -166,17 +160,18 @@ public class Login extends JFrame {
 						socket = new Socket(txt_ipv4.getText(), portn );
 						input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 						output = new PrintStream(socket.getOutputStream());
-						output.println(user+" with color "+(String) combo_color.getSelectedItem());
-						String n1 =input.readLine();
-						Game g1=new Game();
+						output.println(user);
+						//String n1 = input.readLine();
+						String c1 = input.readLine();
+						g1=new Game(socket);
 						dispose();
 						g1.setDefaultCloseOperation(HIDE_ON_CLOSE);
 						g1.setVisible(true);
-						g1.usr_1.setText("Player "+n1+" is online");
-						PreparedStatement preparedStatement = con.connect.prepareStatement("Update players set Color=? WHERE User='"+text_User.getText()+"'");
-						 preparedStatement.setString(1, (String) combo_color.getSelectedItem());
-					     preparedStatement.executeUpdate();
-
+						//g1.usr_1.setText("Player "+n1+" is online");
+						g1.SetWho(c1);
+						/*while(true)
+							System.out.println(c1);*/
+						
 					}
 				} catch (SQLException | IOException e1) {
 					// TODO Auto-generated catch block
@@ -185,7 +180,7 @@ public class Login extends JFrame {
 				
 			}
 		});
-		btn_Accept.setBounds(76, 227, 89, 23);
+		btn_Accept.setBounds(76, 203, 89, 23);
 		contentPane.add(btn_Accept);
 		
 		JButton btnNewButton = new JButton("Register");
@@ -201,12 +196,6 @@ public class Login extends JFrame {
 		});
 		btnNewButton.setBounds(322, 56, 89, 23);
 		contentPane.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("Color");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		lblNewLabel_1.setBounds(76, 177, 46, 14);
-		contentPane.add(lblNewLabel_1);
 		
 	
 	}
