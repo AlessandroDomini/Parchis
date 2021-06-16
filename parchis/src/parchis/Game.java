@@ -9,6 +9,9 @@ import java.awt.Graphics2D;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import parchis.TurnosServer;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -24,13 +27,16 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
 import java.awt.Font;
 
 public class Game extends JFrame {
 
 	private JPanel contentPane;
 	JLabel usr_1;
-	JTextArea area_chat;
 	int anta1, anta2, anta3, anta4, antr1, antr2, antr3, antr4;
 	protected String imagenA="/Ficha_amarilla.png";
 	protected String imagenR="/Ficha_roja.png";
@@ -39,13 +45,16 @@ public class Game extends JFrame {
 	protected Ficha amarillas[]=new Ficha[4];
 	protected Ficha rojas[]=new Ficha[4];
 	int n=0;
-	
+	DataInputStream input = null;
+	DataOutputStream output = null;
+	String who;
+	TurnosGame leer;
 	
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		EventQueue.invokeLater(new Runnable() {
 			
@@ -54,17 +63,18 @@ public class Game extends JFrame {
 					
 					Game frame = new Game();
 					frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
-	}
+	}*/
 
 	/**
 	 * Create the frame.
 	 */
-	public Game() {
+	public Game(Socket socket) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 912, 707);
 		contentPane = new JPanel();
@@ -83,7 +93,18 @@ public class Game extends JFrame {
 			}
 		});
 		
-
+		
+		try {
+			input = new DataInputStream(socket.getInputStream());
+			output = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		leer = new TurnosGame(input, this);
+		leer.start();
+		
+		
 	
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 0, 613, 614);
@@ -212,23 +233,10 @@ public class Game extends JFrame {
 		usr_1.setBounds(633, 30, 253, 27);
 		contentPane.add(usr_1);
 		
-		JLabel usr_2 = new JLabel("");
-		usr_2.setBounds(694, 43, 116, 14);
-		contentPane.add(usr_2);
-		
-		JLabel lbl_chat = new JLabel("CHAT");
-		lbl_chat.setHorizontalAlignment(SwingConstants.CENTER);
-		lbl_chat.setBounds(730, 353, 46, 14);
-		contentPane.add(lbl_chat);
-		
 		JTextArea area_instruct = new JTextArea();
 		area_instruct.setEditable(false);
-		area_instruct.setBounds(652, 97, 221, 219);
+		area_instruct.setBounds(633, 144, 253, 470);
 		contentPane.add(area_instruct);
-		
-		area_chat = new JTextArea();
-		area_chat.setBounds(652, 371, 221, 243);
-		contentPane.add(area_chat);
 		
 		
 		
@@ -247,40 +255,47 @@ public class Game extends JFrame {
 				// TODO Auto-generated method stub
 				
 				if(arg0.getSource().equals(amarillas[0].getF1())) {
-					amarillas[0].moverFicha(casillaA[anta1+n],contentPane);
+					amarillas[0].moverFicha(casillaA[anta1+n]);
 					anta1=anta1+n;
-					
+					MoverTurno(0,anta1);
 
 				}
 				else if(arg0.getSource().equals(amarillas[1].getF1())) {
-					amarillas[1].moverFicha(casillaA[anta2+n], contentPane);
+					amarillas[1].moverFicha(casillaA[anta2+n]);
 					anta2=anta2+n;
+					MoverTurno(1,anta2);
 				}
 				else if(arg0.getSource().equals(amarillas[2].getF1())) {
-					amarillas[2].moverFicha(casillaA[anta3+n], contentPane);
+					amarillas[2].moverFicha(casillaA[anta3+n]);
 					anta3=anta3+n;
+					MoverTurno(2,anta3);
 				}
 				else if(arg0.getSource().equals(amarillas[3].getF1())) {
-					amarillas[3].moverFicha(casillaA[anta4+n], contentPane);
+					amarillas[3].moverFicha(casillaA[anta4+n]);
 					anta4=anta4+n;
+					MoverTurno(3,anta4);
 				}
 				
 				else if(arg0.getSource().equals(rojas[0].getF1())) {
-					rojas[0].moverFicha(casillaR[antr1+n],contentPane);
+					rojas[0].moverFicha(casillaR[antr1+n]);
 					antr1=antr1+n;
+					MoverTurno(0,antr1);
 				}
 				else if(arg0.getSource().equals(rojas[1].getF1())) {
-					rojas[1].moverFicha(casillaR[antr2+n], contentPane);
+					rojas[1].moverFicha(casillaR[antr2+n]);
 					antr2=antr2+n;
+					MoverTurno(1,antr2);
 				}
 				else if(arg0.getSource().equals(rojas[2].getF1())) {
-					rojas[2].moverFicha(casillaR[antr3+n],contentPane);
+					rojas[2].moverFicha(casillaR[antr3+n]);
 					antr3=antr3+n;
+					MoverTurno(2,antr3);
 				}
 				
 				else if(arg0.getSource().equals(rojas[3].getF1())) {
-					rojas[3].moverFicha(casillaR[antr4+n],contentPane);
+					rojas[3].moverFicha(casillaR[antr4+n]);
 					antr4=antr4+n;
+					MoverTurno(3,antr4);
 				}
 				
 				if(amarillas[0].getF1().getX()==280 && amarillas[0].getF1().getY()==335
@@ -340,4 +355,17 @@ public class Game extends JFrame {
 			
 
 	}
+	
+	public void MoverTurno(int ficha, int casilla) {
+		try {
+			output.writeInt(ficha);
+			output.writeInt(casilla);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void SetWho(String who) {this.who = who;}
+	
 }
