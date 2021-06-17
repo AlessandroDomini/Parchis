@@ -25,15 +25,22 @@ public void run() {
 			if(this.G1.who.contains("Yellow")){
 				this.G1.amarillas[ficha].moverFicha(this.G1.casillaA[casilla]);
 				
-				
 			}else if(this.G1.who.contains("Red")) {
 				this.G1.rojas[ficha].moverFicha(this.G1.casillaR[casilla]);
+
 			}
-			
+			this.G1.pasarTurno(true);
+			this.G1.area_instruct.setText(this.G1.area_instruct.getText() + "************************************** \n");
+			this.G1.area_instruct.setText(this.G1.area_instruct.getText() + "Your opponent has moved, is your turn. \n");
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 	}
 }
+
+
+
 }
+
