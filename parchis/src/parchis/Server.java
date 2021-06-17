@@ -16,7 +16,10 @@ public class Server{
 
     /*We keep the port in a constant*/
     private final static int PORT = 5001;
-    
+    static ServerSocket server;
+    static Socket client1;
+    static Socket client2;
+
    
 
     public static void main(String[] args) throws InterruptedException {
@@ -24,11 +27,11 @@ public class Server{
         try {
         	Scanner tec = new Scanner(System.in);
             //Server Socket to wait for network requests
-            ServerSocket server = new ServerSocket(PORT);
+            server = new ServerSocket(PORT);
             System.out.println("Server started");    
               
             //Client1 Socket
-            Socket client1;
+           
             System.out.println("Cliente 1");  
             client1 = server.accept();
             //setSoLinger closes the socket giving 10mS to receive the remaining data
@@ -43,7 +46,6 @@ public class Server{
             
             
             //Client2 Socket
-            Socket client2;
             System.out.println("Cliente 2");  
             client2 = server.accept();
             //setSoLinger closes the socket giving 10mS to receive the remaining data
@@ -76,6 +78,20 @@ public class Server{
             System.err.println(ex.getMessage());
         }
     }
+    
+    public static void closeConnection() {
+    	try {
+			client2.close();
+    		client1.close();
+			server.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
   
 }
+
+
 
