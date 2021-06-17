@@ -1,17 +1,11 @@
 package parchis;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import parchis.TurnosServer;
-
+import javax.swing.text.DefaultCaret;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
@@ -19,19 +13,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTextPane;
 import javax.swing.JTextArea;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.awt.Font;
+import javax.swing.JScrollPane;
 
 public class Game extends JFrame {
 
@@ -52,6 +44,7 @@ public class Game extends JFrame {
 	DataOutputStream output = null;
 	String who;
 	TurnosGame leer;
+	private JScrollPane scrollPane;
 
 
 	/**
@@ -61,21 +54,6 @@ public class Game extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 912, 707);
 		contentPane = new JPanel();
-		contentPane.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mousePressed(MouseEvent e) {
-				while (true) { 
-				    // Se inserta la ubicacion del mouse
-				    double x = e.getX();
-				    double y = e.getY();
-				    
-				    System.out.println("Posicion x = "+x+" Posicion y = "+y);
-				    
-				    return;
-				}
-			}
-		});
-		
 		
 		try {
 			input = new DataInputStream(socket.getInputStream());
@@ -84,16 +62,14 @@ public class Game extends JFrame {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
 		leer = new TurnosGame(input, this);
 		leer.start();
 		
-		
-	
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 0, 613, 614);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
 	
 		casillaA[1] = new Casilla(345, 447);			casillaR[1] = new Casilla(220, 117);
 		casillaA[2] = new Casilla(345, 419);			casillaR[2] = new Casilla(220, 145);
@@ -169,8 +145,6 @@ public class Game extends JFrame {
 		casillaA[72] = new Casilla(280, 335);			casillaR[72] = new Casilla(285, 235);
 		
 	
-		
-		
 		amarillas[0] = new Ficha(442, 434, panel,"am1", imagenA);		
 		amarillas[1] = new Ficha(540, 434, panel,"am2", imagenA);
 		amarillas[2] = new Ficha(442 , 500, panel,"am3", imagenA);
@@ -181,8 +155,7 @@ public class Game extends JFrame {
 		rojas[2] = new Ficha(150 , 130, panel,"r3", imagenR);
 		rojas[3] = new Ficha(50 , 130, panel,"r4", imagenR);
 
-		
-
+	
 		JLabel resultdado = new JLabel("");
 		resultdado.setHorizontalAlignment(SwingConstants.CENTER);
 		resultdado.setBounds(157, 625, 46, 23);
@@ -209,31 +182,36 @@ public class Game extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		area_usr = new JTextArea();
-		area_usr.setEnabled(false);
-		area_usr.setEditable(false);
-		area_usr.setLineWrap(true);
-		area_usr.setBounds(633, 24, 263, 84);
-		contentPane.add(area_usr);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(633, 145, 253, 456);
+		contentPane.add(scrollPane);
 		
 		area_instruct = new JTextArea();
-		area_instruct.setFont(new Font("Monospaced", Font.PLAIN, 16));
-		area_instruct.setForeground(Color.MAGENTA);
-		area_instruct.setEnabled(false);
 		area_instruct.setLineWrap(true);
-		area_instruct.setEditable(false);
-		area_instruct.setBounds(633, 144, 263, 470);
-		contentPane.add(area_instruct);
+		scrollPane.setViewportView(area_instruct);
+		area_instruct.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		area_instruct.setForeground(Color.MAGENTA);
+		area_instruct.setWrapStyleWord(true);
 		
+		DefaultCaret caret = (DefaultCaret) area_instruct.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
+		area_usr = new JTextArea();
+		area_usr.setLineWrap(true);
+		area_usr.setForeground(Color.MAGENTA);
+		area_usr.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		area_usr.setEditable(false);
+		area_usr.setWrapStyleWord(true);
+		area_usr.setBounds(633, 24, 253, 84);
+		contentPane.add(area_usr);
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Game.class.getResource("/parchis.png")));
 		lblNewLabel.setBounds(10, 11, 606, 592);
 		panel.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Close");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btn_close = new JButton("Close");
+		btn_close.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				
@@ -244,61 +222,124 @@ public class Game extends JFrame {
 				
 			}
 		});
-		btnNewButton.setBounds(534, 625, 89, 23);
-		contentPane.add(btnNewButton);
-		
+		btn_close.setBounds(502, 625, 111, 23);
+		contentPane.add(btn_close);
 		
 		
 		MouseListener m1 = new MouseListener(){
-
-				
+	
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
+				if(btn_dado.isEnabled()==false) {
+				
+				Conexion con = new Conexion();
+				con.connectDataBase();
+				
+				try {
+				
 				if(arg0.getSource().equals(amarillas[0].getF1())) {
-					amarillas[0].moverFicha(casillaA[anta1+n]);
+					amarillas[0].moverFicha(casillaA[anta1+n] );
 					anta1=anta1+n;
 					MoverTurno(0,anta1);
+					 
+					   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token1=? WHERE User=?");
+					   preparedStatement.setInt(1,(anta1+4));
+					   preparedStatement.setString(2,Login.user);
+					   preparedStatement.executeUpdate();
 
 				}
 				else if(arg0.getSource().equals(amarillas[1].getF1())) {
 					amarillas[1].moverFicha(casillaA[anta2+n]);
 					anta2=anta2+n;
 					MoverTurno(1,anta2);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token2=? WHERE User=?");
+						   preparedStatement.setInt(1,(anta2+4));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+						
 				}
 				else if(arg0.getSource().equals(amarillas[2].getF1())) {
 					amarillas[2].moverFicha(casillaA[anta3+n]);
 					anta3=anta3+n;
 					MoverTurno(2,anta3);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token3=? WHERE User=?");
+						   preparedStatement.setInt(1,(anta3+4));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+
 				}
 				else if(arg0.getSource().equals(amarillas[3].getF1())) {
 					amarillas[3].moverFicha(casillaA[anta4+n]);
 					anta4=anta4+n;
 					MoverTurno(3,anta4);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token4=? WHERE User=?");
+						   preparedStatement.setInt(1,(anta4+4));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+
 				}
 				
 				else if(arg0.getSource().equals(rojas[0].getF1())) {
 					rojas[0].moverFicha(casillaR[antr1+n]);
 					antr1=antr1+n;
 					MoverTurno(0,antr1);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token1=? WHERE User=?");
+						   preparedStatement.setInt(1,(antr1+38));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+
 				}
 				else if(arg0.getSource().equals(rojas[1].getF1())) {
 					rojas[1].moverFicha(casillaR[antr2+n]);
 					antr2=antr2+n;
 					MoverTurno(1,antr2);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token2=? WHERE User=?");
+						   preparedStatement.setInt(1,(antr2+38));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+
 				}
 				else if(arg0.getSource().equals(rojas[2].getF1())) {
 					rojas[2].moverFicha(casillaR[antr3+n]);
 					antr3=antr3+n;
 					MoverTurno(2,antr3);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token3=? WHERE User=?");
+						   preparedStatement.setInt(1,(antr3+38));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+
 				}
 				
 				else if(arg0.getSource().equals(rojas[3].getF1())) {
 					rojas[3].moverFicha(casillaR[antr4+n]);
 					antr4=antr4+n;
 					MoverTurno(3,antr4);
+					
+						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token4=? WHERE User=?");
+						   preparedStatement.setInt(1,(antr4+38));
+						   preparedStatement.setString(2,Login.user);
+						   preparedStatement.executeUpdate();
+		
 				}
+				
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+
+				}
+				
+				}else
+					JOptionPane.showMessageDialog(contentPane, "You have to roll the dice first <3");
+
+				
 				
 				if(amarillas[0].getF1().getX()==280 && amarillas[0].getF1().getY()==335
 				   && amarillas[1].getF1().getX()==280 && amarillas[1].getF1().getY()==335
@@ -314,31 +355,20 @@ public class Game extends JFrame {
 						   && rojas[2].getF1().getX()==285 && rojas[2].getF1().getY()==235
 						   && rojas[3].getF1().getX()==285 && rojas[3].getF1().getY()==235) {
 									
-									JOptionPane.showMessageDialog(contentPane, "RED WINS!!!");
+							JOptionPane.showMessageDialog(contentPane, "RED WINS!!!");
 
 				}
 
 			}
 			
 				@Override
-				public void mouseClicked(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseClicked(MouseEvent arg0) {}
 
 				@Override
-				public void mouseEntered(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
+				public void mouseEntered(MouseEvent arg0) {}
 
 				@Override
-				public void mouseExited(MouseEvent arg0) {
-					// TODO Auto-generated method stub
-					
-				}
-
-				
+				public void mouseExited(MouseEvent arg0) {}
 
 				@Override
 				public void mouseReleased(MouseEvent arg0) {
@@ -346,42 +376,40 @@ public class Game extends JFrame {
 					
 				}};
 		
-			amarillas[0].getF1().addMouseListener(m1);
-			amarillas[1].getF1().addMouseListener(m1);
-			amarillas[2].getF1().addMouseListener(m1);
-			amarillas[3].getF1().addMouseListener(m1);
-			rojas[0].getF1().addMouseListener(m1);
-			rojas[1].getF1().addMouseListener(m1);
-			rojas[2].getF1().addMouseListener(m1);
-			rojas[3].getF1().addMouseListener(m1);
-			
-
-	}
-	
-	public void MoverTurno(int ficha, int casilla) {
-		try {
-			output.writeInt(ficha);
-			output.writeInt(casilla);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
-	public void pasarTurno(boolean t) {
-		this.turno=t;
-		if(!turno) {
-			btn_dado.setEnabled(false);
-		}
+				amarillas[0].getF1().addMouseListener(m1);
+				amarillas[1].getF1().addMouseListener(m1);
+				amarillas[2].getF1().addMouseListener(m1);
+				amarillas[3].getF1().addMouseListener(m1);
+				rojas[0].getF1().addMouseListener(m1);
+				rojas[1].getF1().addMouseListener(m1);
+				rojas[2].getF1().addMouseListener(m1);
+				rojas[3].getF1().addMouseListener(m1);
 		
-		else {
-			btn_dado.setEnabled(true);
-		}
 	}
 	
-	
-	public void SetWho(String who) {
-		this.who = who;
+			public void MoverTurno(int ficha, int casilla) {
+				try {
+					output.writeInt(ficha);
+					output.writeInt(casilla);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			public void pasarTurno(boolean t) {
+				this.turno=t;
+				if(!turno) {
+					btn_dado.setEnabled(false);
+				}
+				
+				else {
+					btn_dado.setEnabled(true);
+				}
+			}
+			
+			
+			public void SetWho(String who) {
+				this.who = who;
+				}
 		}
-}
-
