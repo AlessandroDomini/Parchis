@@ -43,7 +43,10 @@ public class Game extends JFrame {
 	protected Casilla casillaR[]=new Casilla[76];
 	protected Ficha amarillas[]=new Ficha[4];
 	protected Ficha rojas[]=new Ficha[4];
+	boolean turno=false;
 	JTextArea area_usr;
+	JButton btn_dado;
+	JTextArea area_instruct;
 	int n=0;
 	DataInputStream input = null;
 	DataOutputStream output = null;
@@ -186,36 +189,40 @@ public class Game extends JFrame {
 		contentPane.add(resultdado);
 		
 		
-		JButton btnNewButton = new JButton("Tirar dado");
-		btnNewButton.addActionListener(new ActionListener() {
+		btn_dado = new JButton("Roll Dice");
+		btn_dado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Dado d1= new Dado();
 				n= d1.tirarDado();
 				String n1= String.valueOf(n);
 				resultdado.setText(n1);
 				
+				btn_dado.setEnabled(false);
 				
-				System.out.println(anta1+" "+anta2+" "+ anta3+" "+anta4 + " "+antr1+" "+antr2+" "+ antr3+" "+antr4);
-
 			}
 		});
 		
-		btnNewButton.setBounds(36, 625, 111, 23);
-		contentPane.add(btnNewButton);
+		btn_dado.setBounds(36, 625, 111, 23);
+		contentPane.add(btn_dado);
 
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		area_usr = new JTextArea();
+		area_usr.setEnabled(false);
 		area_usr.setEditable(false);
 		area_usr.setLineWrap(true);
-		area_usr.setBounds(633, 24, 253, 84);
+		area_usr.setBounds(633, 24, 263, 84);
 		contentPane.add(area_usr);
 		
-		JTextArea area_instruct = new JTextArea();
+		area_instruct = new JTextArea();
+		area_instruct.setFont(new Font("Monospaced", Font.PLAIN, 16));
+		area_instruct.setForeground(Color.MAGENTA);
+		area_instruct.setEnabled(false);
+		area_instruct.setLineWrap(true);
 		area_instruct.setEditable(false);
-		area_instruct.setBounds(633, 144, 253, 470);
+		area_instruct.setBounds(633, 144, 263, 470);
 		contentPane.add(area_instruct);
 		
 		
@@ -224,6 +231,21 @@ public class Game extends JFrame {
 		lblNewLabel.setIcon(new ImageIcon(Game.class.getResource("/parchis.png")));
 		lblNewLabel.setBounds(10, 11, 606, 592);
 		panel.add(lblNewLabel);
+		
+		JButton btnNewButton = new JButton("Close");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				
+				JOptionPane.showMessageDialog(null, "You have left the game, see you soon");
+				
+				leer.stop();
+				Server.closeConnection();
+				
+			}
+		});
+		btnNewButton.setBounds(534, 625, 89, 23);
+		contentPane.add(btnNewButton);
 		
 		
 		
@@ -346,5 +368,20 @@ public class Game extends JFrame {
 		}
 	}
 	
-	public void SetWho(String who) {this.who = who;}
+	public void pasarTurno(boolean t) {
+		this.turno=t;
+		if(!turno) {
+			btn_dado.setEnabled(false);
+		}
+		
+		else {
+			btn_dado.setEnabled(true);
+		}
+	}
+	
+	
+	public void SetWho(String who) {
+		this.who = who;
+		}
 }
+
