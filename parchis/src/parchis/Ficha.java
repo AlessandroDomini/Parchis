@@ -12,37 +12,38 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 public class Ficha {
-	
-	private final int SIZE=46;
+
+	private final int SIZE = 46;
 	private int y;
 	private int x;
 	private String nombre;
 	private JLabel f1 = new JLabel("");
-	
-	public Ficha() {}
-	
+
+	public Ficha() {
+	}
+
 	public Ficha(int x, int y, JPanel p1, String nombre, String s) {
 		this.x = x;
 		this.y = y;
 		this.nombre = nombre;
-		f1.setBounds(x, y, SIZE, SIZE );
+		f1.setBounds(x, y, SIZE, SIZE);
 		f1.setIcon(new ImageIcon(Game.class.getResource(s)));
 		p1.add(f1);
 
 	}
-	
+
 	public void moverFicha(Casilla c) {
-		
-		try {		
-		
-			f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);	
-		
-		}catch(NullPointerException e) {
-			
-			JOptionPane.showMessageDialog(null, "You have to roll the dice first motherf*******");
-			
+
+		try {
+
+			f1.setBounds(c.getX(), c.getY(), SIZE, SIZE);
+
+		} catch (NullPointerException e) {
+
+			JOptionPane.showMessageDialog(null, "You have to roll the dice first <3");
+
 		}
-		
+
 	}
 
 	public int getY() {
@@ -64,11 +65,9 @@ public class Ficha {
 	public JLabel getF1() {
 		return f1;
 	}
-	
+
 	public void setF1(JLabel f1) {
 		this.f1 = f1;
 	}
-	
-	
 
 }
