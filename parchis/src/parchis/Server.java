@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Server {
 
 	/* We keep the port in a constant */
-	private final static int PORT = 5004;
+	private final static int PORT = 5007;
 	static ServerSocket server;
 	static Socket client1;
 	static Socket client2;
@@ -75,8 +75,6 @@ public class Server {
 
 	public static void closeConnection() {
 		try {
-			T1.stop();
-			T2.stop();
 			client2.close();
 			client1.close();
 			server.close();
@@ -86,5 +84,4 @@ public class Server {
 			e.printStackTrace();
 		}
 	}
-
 }
