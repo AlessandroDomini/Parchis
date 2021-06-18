@@ -63,7 +63,7 @@ public class Game extends JFrame {
 			e1.printStackTrace();
 		}
 		
-		leer = new TurnosGame(input, this);
+		leer = new TurnosGame(input, output, this);
 		leer.start();
 		
 		JPanel panel = new JPanel();
@@ -216,9 +216,9 @@ public class Game extends JFrame {
 				
 				
 				JOptionPane.showMessageDialog(null, "You have left the game, see you soon");
+				MoverTurno(-1,-1);
 				
-				leer.stop();
-				Server.closeConnection();
+				//Server.closeConnection();
 				
 			}
 		});
@@ -234,20 +234,13 @@ public class Game extends JFrame {
 				
 				if(btn_dado.isEnabled()==false) {
 				
-				Conexion con = new Conexion();
-				con.connectDataBase();
 				
-				try {
 				
 				if(arg0.getSource().equals(amarillas[0].getF1())) {
 					amarillas[0].moverFicha(casillaA[anta1+n] );
 					anta1=anta1+n;
 					MoverTurno(0,anta1);
-					 
-					   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token1=? WHERE User=?");
-					   preparedStatement.setInt(1,(anta1+4));
-					   preparedStatement.setString(2,Login.user);
-					   preparedStatement.executeUpdate();
+		
 
 				}
 				else if(arg0.getSource().equals(amarillas[1].getF1())) {
@@ -255,32 +248,21 @@ public class Game extends JFrame {
 					anta2=anta2+n;
 					MoverTurno(1,anta2);
 					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token2=? WHERE User=?");
-						   preparedStatement.setInt(1,(anta2+4));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
+			
 						
 				}
 				else if(arg0.getSource().equals(amarillas[2].getF1())) {
 					amarillas[2].moverFicha(casillaA[anta3+n]);
 					anta3=anta3+n;
 					MoverTurno(2,anta3);
-					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token3=? WHERE User=?");
-						   preparedStatement.setInt(1,(anta3+4));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
+		
 
 				}
 				else if(arg0.getSource().equals(amarillas[3].getF1())) {
 					amarillas[3].moverFicha(casillaA[anta4+n]);
 					anta4=anta4+n;
 					MoverTurno(3,anta4);
-					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token4=? WHERE User=?");
-						   preparedStatement.setInt(1,(anta4+4));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
+		
 
 				}
 				
@@ -289,10 +271,7 @@ public class Game extends JFrame {
 					antr1=antr1+n;
 					MoverTurno(0,antr1);
 					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token1=? WHERE User=?");
-						   preparedStatement.setInt(1,(antr1+38));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
+		
 
 				}
 				else if(arg0.getSource().equals(rojas[1].getF1())) {
@@ -300,41 +279,23 @@ public class Game extends JFrame {
 					antr2=antr2+n;
 					MoverTurno(1,antr2);
 					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token2=? WHERE User=?");
-						   preparedStatement.setInt(1,(antr2+38));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
 
 				}
 				else if(arg0.getSource().equals(rojas[2].getF1())) {
 					rojas[2].moverFicha(casillaR[antr3+n]);
 					antr3=antr3+n;
 					MoverTurno(2,antr3);
-					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token3=? WHERE User=?");
-						   preparedStatement.setInt(1,(antr3+38));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
-
+				
 				}
 				
 				else if(arg0.getSource().equals(rojas[3].getF1())) {
 					rojas[3].moverFicha(casillaR[antr4+n]);
 					antr4=antr4+n;
 					MoverTurno(3,antr4);
-					
-						   PreparedStatement preparedStatement = con.connect.prepareStatement("UPDATE players SET token4=? WHERE User=?");
-						   preparedStatement.setInt(1,(antr4+38));
-						   preparedStatement.setString(2,Login.user);
-						   preparedStatement.executeUpdate();
 		
 				}
 				
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
 
-				}
 				
 				}else
 					JOptionPane.showMessageDialog(contentPane, "You have to roll the dice first <3");
