@@ -6,12 +6,11 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-public class TurnosServer extends Thread{
-		
+public class TurnosServer extends Thread {
+
 	DataInputStream input = null;
-	DataOutputStream output = null; 
-	
-	
+	DataOutputStream output = null;
+
 	public TurnosServer(DataInputStream input, DataOutputStream output) {
 		super();
 		this.input = input;
@@ -20,13 +19,18 @@ public class TurnosServer extends Thread{
 
 	@Override
 	public void run() {
-		while(true) {
+		while (true) {
 			try {
-				output.writeInt(input.readInt());
+				int n = input.readInt();
+				if (n == -1) {
+					break;
+				}
+				output.writeInt(n);
+				System.out.println(n);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
+
 		}
 	}
 }
